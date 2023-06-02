@@ -3,8 +3,15 @@ import React from "react";
 import defaultCover from "@assets/images/default-main-workspace.png";
 import Image from "next/image";
 import { getRandomHexColor } from "@/src/utils/functions";
-
-const NameWithIcon = () => {
+import { Avatar, Tab } from "@/src/components";
+import RecentlyBoard from "./components/RecentlyBoard";
+import { useAppSelector } from "@/src/hooks";
+import { workspaceSelector } from "@/src/redux/reducer/workspaceSidebar";
+import clsx from "clsx";
+type NameWithIconProps = {
+  description?: React.ReactNode;
+};
+const NameWithIcon = (props: NameWithIconProps) => {
   return (
     <div className="-top-24">
       <div
@@ -35,21 +42,7 @@ const NameWithIcon = () => {
                 ></path>
               </svg>
             </div>
-            <div className="w-max flex flex-col space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-white text-2xl font-medium">
-                  Main Workspace
-                </span>
-
-                <div className="mr-4 rounded-md px-2 hover:bg-gray-600 cursor-pointer">
-                  <i className="far fa-ellipsis-h text-sm text-white"></i>
-                </div>
-              </div>
-              <p className="text-[#9799A6] text-sm">
-                Use the Main Workspace to manage and collaborate on all
-                company-wide boards. All team members are in this workspace.
-              </p>
-            </div>
+            {props.description}
           </div>
         </div>
       </div>
@@ -57,7 +50,31 @@ const NameWithIcon = () => {
   );
 };
 
+const DescriptionWorkspace = () => {
+  return (
+    <>
+      <div className="w-max flex flex-col space-y-2">
+        <div className="flex items-center justify-between">
+          <span className="text-white text-2xl font-medium">
+            Main Workspace
+          </span>
+
+          <div className="mr-4 rounded-md px-2 hover:bg-gray-600 cursor-pointer">
+            <i className="far fa-ellipsis-h text-sm text-white"></i>
+          </div>
+        </div>
+        <p className="text-[#9799A6] text-sm">
+          Use the Main Workspace to manage and collaborate on all company-wide
+          boards. All team members are in this workspace.
+        </p>
+      </div>
+    </>
+  );
+};
+
 const MainWorkspace = () => {
+
+  const { isOpen } = useAppSelector(workspaceSelector)
   return (
     <div>
       <div className="relative w-full h-full">
@@ -68,9 +85,33 @@ const MainWorkspace = () => {
           width={10000}
           height={90}
         />
-        {/* <div className="bg-[url('/images/default-main-workspace.png')] w-full h-40">MainWorkspace</div> */}
-        <div className="absolute top-[13rem] z-10 left-20">
-          <NameWithIcon />
+        <div className={clsx("absolute top-[13rem] z-10 left-20 transition-all", {
+          "top-[17rem]": !isOpen
+        })}>
+          <NameWithIcon description={<DescriptionWorkspace />} />
+        </div>
+        <div className="px-20 mt-32 w-full">
+          <Tab>
+            <Tab.Item label="Recent Boards">
+              <div className="mt-4 flex flex-col space-y-4">
+                <div>
+                  <span className="text-[#838594] text-sm">
+                    Boards and dashboards you visited recently in this workspace
+                  </span>
+                </div>
+                <RecentlyBoard name="Board 1"/>
+              </div>
+            </Tab.Item>
+            <Tab.Item label="Members">
+              <div className="mt-4 flex flex-col space-y-4">
+                <span className="text-md font-medium text-white">Members / 1</span>
+                <div className="flex items-center space-x-2">
+                  <Avatar size="large" name="M Zulfi"/>
+                  <span className="text-md font-medium text-white">M Zulfi</span>
+                </div>
+              </div>
+            </Tab.Item>
+          </Tab>
         </div>
       </div>
     </div>

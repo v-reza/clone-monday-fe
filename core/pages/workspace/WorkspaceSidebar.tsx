@@ -1,10 +1,16 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import clsx from "clsx";
 import { getRandomHexColor } from "@/src/utils/functions";
 import { Button, ButtonIcon, Menu, Separator } from "@/src/components";
-import { CheckboxInput, SearchFilterInput, SearchInput } from "@/src/components/form";
+import {
+  CheckboxInput,
+  SearchFilterInput,
+  SearchInput,
+} from "@/src/components/form";
+import { useAppDispatch, useAppSelector } from "@/src/hooks";
+import { setIsOpen, workspaceSelector } from "@/src/redux/reducer/workspaceSidebar";
 
 const NameWithIcon = () => {
   return (
@@ -95,21 +101,28 @@ const Form = () => {
                 data-tooltip="Filters"
                 data-tooltip-position="top"
               >
-                <ButtonIcon btnType="info" icon="far fa-filter text-white" />
+                <div className="relative">
+                  <div className="absolute -top-[0.8rem] -right-[0.4rem]">
+                    <span className="text-xs text-white px-1 rounded-full bg-blue-500">0</span>
+                  </div>
+                  <ButtonIcon btnType="info" icon="far fa-filter text-white" />
+                </div>
               </div>
             }
           >
             <div className="block px-4 py-2">
-              <span className="text-[#C0C2D0] text-xs font-medium">Filter by</span>
+              <span className="text-[#C0C2D0] text-xs font-medium">
+                Filter by
+              </span>
               <div className="flex flex-col space-y-3">
-                <CheckboxInput label="Main"/>
-                <CheckboxInput label="Private"/>
-                <CheckboxInput label="Shareable"/>
+                <CheckboxInput label="Main" />
+                <CheckboxInput label="Private" />
+                <CheckboxInput label="Shareable" />
                 <Separator />
-                <CheckboxInput label="Subsribed or Owner"/>
-                <CheckboxInput label="Owner only"/>
+                <CheckboxInput label="Subsribed or Owner" />
+                <CheckboxInput label="Owner only" />
                 <Separator />
-                <CheckboxInput label="Dashboards only"/>
+                <CheckboxInput label="Dashboards only" />
               </div>
             </div>
           </Menu>
@@ -131,10 +144,14 @@ const Form = () => {
 };
 
 const WorkspaceSidebar = () => {
-  const [open, setOpen] = useState(false);
+  const { isOpen: open } = useAppSelector(workspaceSelector)
+  const dispatch = useAppDispatch()
+  const setOpen = useCallback((value: boolean) => {
+    dispatch(setIsOpen(value))
+  }, [open])
 
   useEffect(() => {
-    setOpen(true);
+    setOpen(true)
   }, []);
 
   return (

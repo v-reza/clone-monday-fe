@@ -1,9 +1,9 @@
-import DataForm from "@/src/contexts/DataForm";
 import "./globals.css";
 import "@assets/tooltip.scss";
 import { Inter } from "next/font/google";
 import "@/src/assets/fontawesome/css/all.css";
 import Sidebar from "@/core/layout/Sidebar";
+import ReduxProvider from "@/src/contexts/ReduxProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,8 +21,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <div className="flex flex-1">
-          <Sidebar />
-          {children}
+          <ReduxProvider>
+            <Sidebar />
+            {children}
+          </ReduxProvider>
         </div>
       </body>
     </html>
