@@ -3,17 +3,17 @@ import React, { PropsWithChildren, Fragment } from "react";
 import { Menu as Base, Transition } from "@headlessui/react";
 import { classNames } from "../utils/functions";
 import clsx from "clsx";
-type MenuProps = {
+type DropdownProps = {
   toolbar: React.ReactNode;
   className?: string;
 };
 
-type MenuItemProps = {
+type DropdownItemProps = {
   children: React.ReactNode;
   activeBg?: string;
 };
 
-export const Menu = (props: PropsWithChildren<MenuProps>) => {
+export const Dropdown = (props: PropsWithChildren<DropdownProps>) => {
   const { toolbar, children, className } = props;
   return (
     <>
@@ -37,7 +37,7 @@ export const Menu = (props: PropsWithChildren<MenuProps>) => {
             <div className="py-1">
               {React.Children.map(children, (childs: any) => {
                 const { props: child } =
-                  childs as React.ReactElement<MenuItemProps>;
+                  childs as React.ReactElement<DropdownItemProps>;
                 const { activeBg } = child;
                 return (
                   <>
@@ -57,12 +57,4 @@ export const Menu = (props: PropsWithChildren<MenuProps>) => {
   );
 };
 
-Menu.Item = (props: MenuItemProps) => {
-  return (
-    <>
-      {props.children}
-    </>
-  )
-}
-
-export default Menu;
+export default Dropdown;

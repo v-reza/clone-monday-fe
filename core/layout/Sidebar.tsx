@@ -1,12 +1,20 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import logoIcon from "@assets/icon/monday_logo_icon.png";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
+import { useAppDispatch } from "@/src/hooks";
+import { setIsOpen } from "@/src/redux/reducer/workspaceSidebar";
 
 const Sidebar = () => {
   const pathname = usePathname();
+  const dispatch = useAppDispatch()
+  useEffect(() => {
+    if (pathname !== "/workspace") {
+      dispatch(setIsOpen(false))
+    }
+  }, [pathname])
 
   return (
     <div className="h-screen min-h-full">

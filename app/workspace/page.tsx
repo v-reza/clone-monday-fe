@@ -1,5 +1,4 @@
 "use client";
-import Container from "@/core/layout/Container";
 import MainWorkspace from "@/core/pages/workspace/MainWorkspace";
 import WorkspaceSidebar from "@/core/pages/workspace/WorkspaceSidebar";
 import React from "react";

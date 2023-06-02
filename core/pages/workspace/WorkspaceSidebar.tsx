@@ -1,16 +1,16 @@
 "use client";
-import React, { useState, useEffect, useCallback } from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useCallback } from "react";
 import clsx from "clsx";
 import { getRandomHexColor } from "@/src/utils/functions";
 import { Button, ButtonIcon, Menu, Separator } from "@/src/components";
-import {
-  CheckboxInput,
-  SearchFilterInput,
-  SearchInput,
-} from "@/src/components/form";
+import { CheckboxInput, SearchInput } from "@/src/components/form";
 import { useAppDispatch, useAppSelector } from "@/src/hooks";
-import { setIsOpen, workspaceSelector } from "@/src/redux/reducer/workspaceSidebar";
+import {
+  setIsOpen,
+  workspaceSelector,
+} from "@/src/redux/reducer/workspaceSidebar";
+import ActionWorkspace from "./components/sidebar/ActionWorkspace";
+import { listWorkspaceBoard } from "@/src/utils/dummy/workspace";
 
 const NameWithIcon = () => {
   return (
@@ -103,7 +103,9 @@ const Form = () => {
               >
                 <div className="relative">
                   <div className="absolute -top-[0.8rem] -right-[0.4rem]">
-                    <span className="text-xs text-white px-1 rounded-full bg-blue-500">0</span>
+                    <span className="text-xs text-white px-1 rounded-full bg-blue-500">
+                      0
+                    </span>
                   </div>
                   <ButtonIcon btnType="info" icon="far fa-filter text-white" />
                 </div>
@@ -136,7 +138,53 @@ const Form = () => {
                 <ButtonIcon btnType="primary" icon="far fa-plus text-white" />
               </div>
             }
-          ></Menu>
+          >
+            <div className="block px-4 py-2 hover:bg-gray-600">
+              <div className="flex items-center space-x-2">
+                <i className="far fa-th-large text-white text-md"></i>
+                <span className="text-sm text-[#D6D8DF]">New Board</span>
+              </div>
+            </div>
+            <div className="block px-4 py-2 hover:bg-gray-600">
+              <div className="flex items-center space-x-2">
+                <i className="far fa-file-alt text-white text-md"></i>
+                <span className="text-sm text-[#D6D8DF]">New Doc</span>
+              </div>
+            </div>
+
+            <div className="block px-4 py-2 hover:bg-gray-600">
+              <div className="flex items-center space-x-2">
+                <i className="far fa-file-edit text-white text-md"></i>
+                <span className="text-sm text-[#D6D8DF]">New Form</span>
+              </div>
+            </div>
+            <Separator />
+            <div className="block px-4 py-2 hover:bg-gray-600">
+              <div className="flex items-center space-x-2">
+                <i className="far fa-file-chart-line text-white text-md"></i>
+                <span className="text-sm text-[#D6D8DF]">New Dashboard</span>
+              </div>
+            </div>
+            <div className="block px-4 py-2 hover:bg-gray-600">
+              <div className="flex items-center space-x-2">
+                <i className="far fa-folder-plus text-white text-md"></i>
+                <span className="text-sm text-[#D6D8DF]">New Folder</span>
+              </div>
+            </div>
+          </Menu>
+        </div>
+        <div className="flex flex-col space-y-2">
+          {listWorkspaceBoard.map((item) => (
+            <div className="py-3 rounded-md hover:bg-gray-600 cursor-pointer">
+              <div className="flex items-center justify-between">
+                <div className="flex px-2 items-center space-x-4">
+                  <i className="far fa-th-large text-white text-md"></i>
+                  <span className="text-sm text-white">{item.name}</span>
+                </div>
+                <ActionWorkspace />
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </>
@@ -144,14 +192,17 @@ const Form = () => {
 };
 
 const WorkspaceSidebar = () => {
-  const { isOpen: open } = useAppSelector(workspaceSelector)
-  const dispatch = useAppDispatch()
-  const setOpen = useCallback((value: boolean) => {
-    dispatch(setIsOpen(value))
-  }, [open])
+  const { isOpen: open } = useAppSelector(workspaceSelector);
+  const dispatch = useAppDispatch();
+  const setOpen = useCallback(
+    (value: boolean) => {
+      dispatch(setIsOpen(value));
+    },
+    [open]
+  );
 
   useEffect(() => {
-    setOpen(true)
+    setOpen(true);
   }, []);
 
   return (

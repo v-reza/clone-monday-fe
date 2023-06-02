@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 
 type CheckBoxInputProps = {
   value?: string;
@@ -9,6 +9,10 @@ type CheckBoxInputProps = {
 
 export const CheckboxInput = (props: CheckBoxInputProps) => {
   const { value, label } = props;
+  const [checked, setChecked] = useState(false)
+  const onChange = (e: any) => {
+    setChecked(!checked)
+  }
 
   return (
     <>
@@ -18,8 +22,10 @@ export const CheckboxInput = (props: CheckBoxInputProps) => {
             id={label}
             name={label}
             type="checkbox"
-            className="h-4 w-4 border border-[#C0C2D0] rounded accent-gray-700 !bg-red-600 text-transparent"
-            style={{ backgroundColor: "black" }}
+            checked={checked}
+            onChange={onChange}
+            className="h-4 w-4 border border-[#C0C2D0] rounded accent-blue-600"
+            style={{ appearance: checked ? "checkbox" : "none" }}
           />
         </div>
         <div className="ml-3 text-xs">
