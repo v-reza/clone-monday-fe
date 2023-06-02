@@ -148,14 +148,14 @@ const WorkspaceSidebar = () => {
         >
           {open ? (
             <div
-              className="absolute p-[0.10rem] px-2 bg-black border border-white/20 rounded-full top-4 left-[22rem] hover:bg-gray-500 cursor-pointer"
+              className="absolute p-[0.10rem] px-2 z-10 bg-black border border-white/20 rounded-full top-4 left-[22rem] hover:bg-gray-500 cursor-pointer"
               onClick={() => setOpen(false)}
             >
               <i className="far fa-chevron-left text-white text-sm"></i>
             </div>
           ) : (
             <div
-              className="absolute p-[0.10rem] px-2 bg-black border border-white/20 rounded-full top-4 left-[5.3rem] hover:bg-gray-500 cursor-pointer"
+              className="absolute p-[0.10rem] px-2 z-10 bg-black border border-white/20 rounded-full top-4 left-[5.3rem] hover:bg-gray-500 cursor-pointer"
               onClick={() => setOpen(true)}
             >
               <i className="far fa-chevron-right text-white text-sm"></i>

@@ -26,7 +26,7 @@ export const Menu = (props: PropsWithChildren<MenuProps>) => {
         >
           <Base.Panel
             className={clsx(
-              "absolute z-10 mt-2 w-56 origin-top-right rounded-md bg-[#30324E] shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none",
+              "absolute z-40 mt-2 w-56 origin-top-right rounded-md bg-[#30324E] shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none",
               className
             )}
           >
