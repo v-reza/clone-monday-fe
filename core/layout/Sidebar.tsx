@@ -11,7 +11,7 @@ const Sidebar = () => {
   const pathname = usePathname();
   const dispatch = useAppDispatch()
   useEffect(() => {
-    if (pathname !== "/workspace") {
+    if (pathname !== "/workspace" || pathname.includes("/boards")) {
       dispatch(setIsOpen(false))
     }
   }, [pathname])
@@ -40,7 +40,7 @@ const Sidebar = () => {
                   data-tooltip="Workspace"
                   data-tooltip-position="right"
                 >
-                  {pathname === "/workspace" && (
+                  {pathname === "/workspace" || pathname.includes("/boards") && (
                     <div className="arrow-sidebar" />
                   )}
                   <i className="fas fa-flower text-indigo-600 text-xl "></i>

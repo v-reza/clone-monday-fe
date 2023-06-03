@@ -17,7 +17,8 @@ type ButtonProps = {
     | "warning"
     | "success"
     | "info"
-    | "no-outline";
+    | "no-outline"
+    | "outline-secondary";
   label?: string;
   icon?: BtnIconProps;
   onClick?: () => void;
@@ -49,6 +50,8 @@ export const Button = (props: ButtonProps) => {
   } else if (btnType === "no-outline") {
     classes =
       "bg-inherit hover:bg-gray-700 text-gray-800  py-2 px-4 border border-gray-400 rounded";
+  } else if (btnType === "outline-secondary") {
+    classes = "bg-inherit border border-gray-600 hover:bg-gray-700 rounded"
   }
 
   return (

@@ -44,7 +44,7 @@ export const ButtonIcon = (props: ButtonIconProps) => {
       "bg-inherit hover:bg-gray-700 text-gray-800  border border-gray-400 rounded";
   }
   return (
-    <>
+    <div>
       <button
         type="button"
         onClick={props.onClick}
@@ -56,7 +56,7 @@ export const ButtonIcon = (props: ButtonIconProps) => {
       >
         <i className={clsx(icon)}></i>
       </button>
-    </>
+    </div>
   );
 };
 

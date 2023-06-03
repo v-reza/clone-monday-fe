@@ -15,3 +15,7 @@ export const getInitialAvatar = (fullName: string): string => {
 
   return avatar;
 }
+
+export const hasNextItem = (array: any[], currentIndex: number) => {
+  return array.length > currentIndex + 1;
+}

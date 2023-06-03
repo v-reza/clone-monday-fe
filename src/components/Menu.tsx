@@ -20,7 +20,7 @@ export const Menu = (props: PropsWithChildren<MenuProps>) => {
   return (
     <>
       <Base as="div">
-        <Base.Button className="focus:ring-0 focus:ring-offset-0 focus:outline-0">
+        <Base.Button className="focus:ring-0 focus:ring-offset-0 focus:outline-0" as="div">
           {toolbar}
         </Base.Button>
         <Transition

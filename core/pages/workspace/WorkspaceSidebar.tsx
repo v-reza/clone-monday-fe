@@ -11,6 +11,7 @@ import {
 } from "@/src/redux/reducer/workspaceSidebar";
 import ActionWorkspace from "./components/sidebar/ActionWorkspace";
 import { listWorkspaceBoard } from "@/src/utils/dummy/workspace";
+import Link from "next/link";
 
 const NameWithIcon = () => {
   return (
@@ -175,7 +176,8 @@ const Form = () => {
         </div>
         <div className="flex flex-col space-y-2">
           {listWorkspaceBoard.map((item) => (
-            <div className="py-3 rounded-md hover:bg-gray-600 cursor-pointer">
+            <Link key={item.name} href="/boards/1">
+            <div className="py-3 rounded-md hover:bg-gray-600 cursor-pointer" key={item.name}>
               <div className="flex items-center justify-between">
                 <div className="flex px-2 items-center space-x-4">
                   <i className="far fa-th-large text-white text-md"></i>
@@ -184,6 +186,7 @@ const Form = () => {
                 <ActionWorkspace />
               </div>
             </div>
+            </Link>
           ))}
         </div>
       </div>
