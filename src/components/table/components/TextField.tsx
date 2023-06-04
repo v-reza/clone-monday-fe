@@ -1,19 +1,25 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { IPublicFieldProps } from "../types/field.type";
 import { useTableContext } from "../context";
 import { useRowContext } from "../Row";
+import clsx from "clsx";
+import _ from "lodash"
 
-type TextFieldProps = IPublicFieldProps & {}
+type TextFieldProps = IPublicFieldProps & {
+  className?: string
+}
 
 const TextField = (props: TextFieldProps) => {
-  const { source, label } = props;
+  const { source, label, className } = props;
   const { data, setData } = useRowContext()
-  console.log({data})
-  const {} = useTableContext()
+
+  const value = useMemo(() => {
+    return _.get(data, source)
+  }, [JSON.stringify(data)])
 
   return (
     <>
-      <span className="text-[#D6D8DF] text-xs font-medium">{label}</span>
+      <span className={clsx("text-[#D6D8DF] text-xs font-medium", className)}>{value}</span>
     </>
   );
 };

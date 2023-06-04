@@ -23,7 +23,8 @@ type Props = { defaultData: any };
 export const RowProvider = (props: PropsWithChildren<Props>) => {
   const { defaultData, children } = props;
   const [data, setData] = useState<any>(defaultData)
-console.log(data)
+  // console.log({data})
+
   const value: IRowContext = {
     data,
     setData

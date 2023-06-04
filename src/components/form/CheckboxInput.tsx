@@ -1,17 +1,19 @@
 "use client";
+import clsx from "clsx";
 import React, { useState } from "react";
 
 type CheckBoxInputProps = {
-  value?: string;
+  checked?: boolean
   label?: string;
   onChange?: (value: string) => void;
+  className?: string
+  styles?: React.CSSProperties
 };
 
 export const CheckboxInput = (props: CheckBoxInputProps) => {
-  const { value, label } = props;
-  const [checked, setChecked] = useState(false)
+  const { checked = false, label, className, styles } = props;
   const onChange = (e: any) => {
-    setChecked(!checked)
+    props.onChange && props.onChange(e.target.value);
   }
 
   return (
@@ -24,8 +26,8 @@ export const CheckboxInput = (props: CheckBoxInputProps) => {
             type="checkbox"
             checked={checked}
             onChange={onChange}
-            className="h-4 w-4 border border-[#C0C2D0] rounded accent-blue-600"
-            style={{ appearance: checked ? "checkbox" : "none" }}
+            className={clsx("h-4 w-4 border border-[#C0C2D0] rounded accent-blue-600", className)}
+            style={{ appearance: checked ? "checkbox" : "none", ...styles }}
           />
         </div>
         <div className="ml-3 text-xs">

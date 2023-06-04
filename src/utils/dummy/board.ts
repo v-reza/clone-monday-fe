@@ -28,3 +28,18 @@ export const boardGroup1 = {
     ],
   },
 };
+
+export const boardGroup = {
+  data: [
+    {
+      project_name: "Project 1 ",
+      task_name: "Task 1",
+      status_name: "Status 1",
+    },
+    {
+      project_name: "Project 2",
+      task_name: "Task 2",
+      status_name: "Status 2",
+    },
+  ]
+}

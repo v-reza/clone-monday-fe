@@ -2,7 +2,7 @@
 import { Button, HyperlinkText } from "@/src/components";
 import Table from "@/src/components/table/Table";
 import TextField from "@/src/components/table/components/TextField";
-import { boardGroup1 } from "@/src/utils/dummy/board";
+import { boardGroup, boardGroup1 } from "@/src/utils/dummy/board";
 import React from "react";
 
 const MainBoard = () => {
@@ -54,8 +54,25 @@ const MainBoard = () => {
           </div>
         </div>
         <div className="px-6 py-6">
-          <Table customData={boardGroup1}>
-            <TextField label="test" source="test"/>
+          <Table
+            customData={boardGroup}
+            name="Query Group 1"
+            color="#784BD1"
+            onSelectedRows={(rows) => console.log({ rows })}
+          >
+            <TextField label="Project" source="project_name" />
+            <TextField label="Task" source="task_name" />
+            <TextField label="Status" source="status_name" />
+          </Table>
+          <Table
+            customData={boardGroup}
+            name="Query Group 1"
+            color="#784BD1"
+            onSelectedRows={(rows) => console.log({ rows })}
+          >
+            <TextField label="Project" source="project_name" />
+            <TextField label="Task" source="task_name" />
+            <TextField label="Status" source="status_name" />
           </Table>
         </div>
       </div>
